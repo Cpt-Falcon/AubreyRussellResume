@@ -50,7 +50,14 @@ a, .btn-link {
 }
 
 .list-group-item {
-    padding: 0px !important;
-    border: none !important;
-    margin: 0px !important;
+    border: 0 !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.text-elem {
+    border: 0 !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    text-align: left;
 }
