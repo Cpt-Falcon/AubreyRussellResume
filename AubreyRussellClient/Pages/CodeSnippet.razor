@@ -1,0 +1,17 @@
+﻿@page "/codeSnippet"
+@inject IJSRuntime jsRuntime
+
+<article></article>
+
+@code {      
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("UpdateText");
+        }
+    }
+}
+

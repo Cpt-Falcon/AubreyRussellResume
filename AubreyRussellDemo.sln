@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubreyRussellServer", "AubreyRussellServer\AubreyRussellServer.csproj", "{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubreyRussellClient", "AubreyRussellClient\AubreyRussellClient.csproj", "{73EE7CBD-666E-4995-B8D4-AF824514B11B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BD9CE41-DC46-42F3-865B-860EE66C9C1C}
+	EndGlobalSection
+EndGlobal
