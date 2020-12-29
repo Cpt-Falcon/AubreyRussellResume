@@ -28,6 +28,13 @@ namespace AubreyRussellServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(policy =>
+            {
+                policy.AddPolicy("CorsPolicy", opt => opt
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
             services.AddDbContext<ResumeContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
@@ -48,11 +55,9 @@ namespace AubreyRussellServer
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

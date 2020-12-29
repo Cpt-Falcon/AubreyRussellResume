@@ -18,10 +18,15 @@ namespace AubreyRussellClient.Repository
 
         public async Task<List<CodeSnippet>> GetCodeSnipperts()
         {
-            var response = await _client.GetAsync("https://localhost:44381/api/GetCodeSnippets");
-            var content = await response.Content.ReadAsStringAsync();
-            var codeSnippets = JsonSerializer.Deserialize<List<CodeSnippet>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            return codeSnippets;
+            var response = await _client.GetAsync("https://localhost:44381/GetCodeSnippets");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var codeSnippets = JsonSerializer.Deserialize<List<CodeSnippet>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                return codeSnippets;
+            }
+
+            return null;
         }
     }
 }
