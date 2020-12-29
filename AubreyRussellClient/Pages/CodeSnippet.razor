@@ -1,11 +1,15 @@
-﻿@page "/codeSnippet"
+﻿@using AubreyRussellClient.Repository
+@page "/codeSnippet"
 @inject IJSRuntime jsRuntime
 
 <article></article>
 @code {
+    [Inject]
+    public ResumeHttpRepository ResumeRepo { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-
+        var tes = await ResumeRepo.GetCodeSnipperts();
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {

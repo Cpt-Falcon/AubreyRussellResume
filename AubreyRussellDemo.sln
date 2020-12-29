@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubreyRussellServer", "AubreyRussellServer\AubreyRussellServer.csproj", "{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubreyRussellServer", "AubreyRussellServer\AubreyRussellServer.csproj", "{0A0C98FA-3EFC-4EC0-8599-CF855208F1FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AubreyRussellClient", "AubreyRussellClient\AubreyRussellClient.csproj", "{73EE7CBD-666E-4995-B8D4-AF824514B11B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubreyRussellClient", "AubreyRussellClient\AubreyRussellClient.csproj", "{73EE7CBD-666E-4995-B8D4-AF824514B11B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{F2103268-8806-4A25-82C3-041F9AF24344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73EE7CBD-666E-4995-B8D4-AF824514B11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2103268-8806-4A25-82C3-041F9AF24344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2103268-8806-4A25-82C3-041F9AF24344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2103268-8806-4A25-82C3-041F9AF24344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2103268-8806-4A25-82C3-041F9AF24344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
