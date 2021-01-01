@@ -1,6 +1,6 @@
 using System;
 
-namespace AubreyRussellServer
+namespace WebApplication1
 {
     public class WeatherForecast
     {

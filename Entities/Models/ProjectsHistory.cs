@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Skill
+    public class ProjectsHistory
     {
         [Key]
+        [ForeignKey("Resume")]
         public int Id { get; set; }
 
-        public string SkillName { get; set; }
+
+        public ICollection<ContentItem> ExperienceItems { get; set; } = new List<ContentItem>();
 
         [JsonIgnore]
-        public virtual ICollection<Person> Person { get; set; } = new List<Person>();
+        public Resume Resume { get; set; }
     }
 }

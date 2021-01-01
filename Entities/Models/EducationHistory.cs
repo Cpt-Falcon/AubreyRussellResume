@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class CodeSnippet
+    public class EducationHistory
     {
         [Key]
         [ForeignKey("Resume")]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public ICollection<ContentItem> ExperienceItems { get; set; } = new List<ContentItem>();
 
-        public string RepoLink { get; set; }
+        public bool Current { get; set; }
 
-        public string Snippet { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [JsonIgnore]
         public Resume Resume { get; set; }
+
+        public School School { get; set; }
     }
 }

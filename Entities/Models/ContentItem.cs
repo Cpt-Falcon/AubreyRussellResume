@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Skill
+    public class ContentItem
     {
         [Key]
         public int Id { get; set; }
 
-        public string SkillName { get; set; }
+        public string ExperienceItemContent { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Person> Person { get; set; } = new List<Person>();
+        public ICollection<ContentSubItem> ExperienceSubItems { get; set; } = new List<ContentSubItem>();
+
     }
 }

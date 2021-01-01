@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using AubreyRussellServer.Utilities;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,25 +13,20 @@ namespace AubreyRussellServer.Controllers
     [Route("/api/[controller]")]
     public class ResumeController : ControllerBase
     {
-        private readonly ILogger<ResumeController> _logger;
+        private readonly ILogger<ResumeController> logger;
+        private readonly ResumeContext resumeContext;
 
-        public ResumeController(ILogger<ResumeController> logger)
+        public ResumeController(ILogger<ResumeController> logger, ResumeContext resumeContext)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.resumeContext = resumeContext;
         }
 
         [HttpGet]
-        [Route("/GetCodeSnippets")]
-        public IEnumerable<CodeSnippet> GetCodeSnippets()
+        [Route("/GetResumeContent")]
+        public async Task<Resume> GetResumeContent(string resumePersonFullName)
         {
-            List<CodeSnippet> codeSnippets = new List<CodeSnippet>();
-
-            codeSnippets.Add(new CodeSnippet());
-            codeSnippets.Add(new CodeSnippet());
-            codeSnippets[0].Resume = new Resume();
-            codeSnippets[0].Resume.Person = new Person();
-            codeSnippets[0].Resume.Person.EmailAddress = "test@test.com";
-            return codeSnippets;
+            return await resumeContext.GetCompleteResumeByPersonName(resumePersonFullName);
         }
     }
 }

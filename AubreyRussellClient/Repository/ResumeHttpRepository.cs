@@ -16,14 +16,13 @@ namespace AubreyRussellClient.Repository
             _client = client;
         }
 
-        public async Task<List<CodeSnippet>> GetCodeSnipperts()
+        public async Task<Resume> GetResumeContent()
         {
-            var response = await _client.GetAsync("https://localhost:44381/GetCodeSnippets");
+            var response = await _client.GetAsync("https://localhost:44381/GetResumeContent");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var codeSnippets = JsonSerializer.Deserialize<List<CodeSnippet>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                return codeSnippets;
+                return JsonSerializer.Deserialize<Resume>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             }
 
             return null;

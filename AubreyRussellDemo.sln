@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubreyRussellServer", "Aubr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AubreyRussellClient", "AubreyRussellClient\AubreyRussellClient.csproj", "{73EE7CBD-666E-4995-B8D4-AF824514B11B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{F2103268-8806-4A25-82C3-041F9AF24344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{F2103268-8806-4A25-82C3-041F9AF24344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
