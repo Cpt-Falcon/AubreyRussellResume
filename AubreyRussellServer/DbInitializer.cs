@@ -11,7 +11,8 @@ namespace AubreyRussellServer
     {
         public static void Initialize(ResumeContext context)
         {
-            context.Database.EnsureDeleted();
+            // Uncomment to clear database each time.
+            //context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
                 Person me = GeneratePerson();
@@ -36,11 +37,6 @@ namespace AubreyRussellServer
                 };
 
                 context.AddResume(resume).Wait();
-                //context.AddCodeSnippetToResume(me.EmailAddress, codeSnippet).Wait();
-                //context.AddProfessionalHistoryToResume(me.EmailAddress, profExperience[0]).Wait();
-                //context.AddProfessionalHistoryToResume(me.EmailAddress, profExperience[1]).Wait();
-                //context.AddEdducationToResume(me.EmailAddress, GetEducationHistory()).Wait();
-                //context.AddProjectToResume(me.EmailAddress, GetProjectsHistory()).Wait();
             }
         }
 

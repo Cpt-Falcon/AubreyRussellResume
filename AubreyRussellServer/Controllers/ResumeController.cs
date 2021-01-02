@@ -23,10 +23,10 @@ namespace AubreyRussellServer.Controllers
         }
 
         [HttpGet]
-        [Route("/GetResumeContent")]
-        public async Task<Resume> GetResumeContent(string resumePersonFullName)
+        [Route("GetResumeContent")]
+        public async Task<Resume> GetResumeContent(string resumePersonEmail)
         {
-            return await resumeContext.GetCompleteResumeByPersonEmail(resumePersonFullName);
+            return await resumeContext.GetCompleteResumeByPersonEmail(resumePersonEmail);
         }
     }
 }

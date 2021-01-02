@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace AubreyRussellClient.Repository
 {
@@ -18,7 +19,15 @@ namespace AubreyRussellClient.Repository
 
         public async Task<Resume> GetResumeContent()
         {
-            var response = await _client.GetAsync("https://localhost:44381/GetResumeContent");
+            var builder = new UriBuilder("https://localhost/api/Resume/GetResumeContent");
+            builder.Port = 44381;
+            var query = HttpUtility.ParseQueryString(builder.Query);
+
+            // For now just hardcode my email address
+            query["resumePersonEmail"] = "arusse02@gmail.com";
+            builder.Query = query.ToString();
+            string result = builder.ToString();
+            var response = await _client.GetAsync(result);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

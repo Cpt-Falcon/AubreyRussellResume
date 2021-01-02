@@ -121,11 +121,11 @@ namespace AubreyRussellServer.Utilities
                 _ = await foundResume.Include(x => x.Person).ThenInclude(x => x.Languages).ToListAsync();
                 _ = await foundResume.Include(x => x.Person).ThenInclude(x => x.Skills).ToListAsync();
                 _ = await foundResume.Include(x => x.CodeSnippets).ToListAsync();
-                _ = await foundResume.Include(x => x.ProfessionalExperienceHistories).ThenInclude(x => x.Employer).ToListAsync();
-                _ = await foundResume.Include(x => x.ProfessionalExperienceHistories).ThenInclude(x => x.ExperienceItems).ToListAsync();
                 _ = await foundResume.Include(x => x.EducationHistory).ThenInclude(x => x.School).ToListAsync();
-                _ = await foundResume.Include(x => x.EducationHistory).ThenInclude(x => x.ExperienceItems).ToListAsync();
-                _ = await foundResume.Include(x => x.ProjectsHistory).ThenInclude(x => x.ExperienceItems).ToListAsync(); 
+                _ = await foundResume.Include(x => x.ProfessionalExperienceHistories).ThenInclude(x => x.Employer).ToListAsync();
+                _ = await foundResume.Include(x => x.ProfessionalExperienceHistories).ThenInclude(x => x.ExperienceItems).ThenInclude(x => x.ExperienceSubItems).ToListAsync();
+                _ = await foundResume.Include(x => x.EducationHistory).ThenInclude(x => x.ExperienceItems).ThenInclude(x => x.ExperienceSubItems).ToListAsync();
+                _ = await foundResume.Include(x => x.ProjectsHistory).ThenInclude(x => x.ExperienceItems).ThenInclude(x => x.ExperienceSubItems).ToListAsync(); 
             }
 
             return await foundResume.FirstOrDefaultAsync(x => x.Person.EmailAddress == personEmail);
