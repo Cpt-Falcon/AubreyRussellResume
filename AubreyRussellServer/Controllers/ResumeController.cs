@@ -26,7 +26,7 @@ namespace AubreyRussellServer.Controllers
         [Route("/GetResumeContent")]
         public async Task<Resume> GetResumeContent(string resumePersonFullName)
         {
-            return await resumeContext.GetCompleteResumeByPersonName(resumePersonFullName);
+            return await resumeContext.GetCompleteResumeByPersonEmail(resumePersonFullName);
         }
     }
 }

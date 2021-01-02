@@ -23,25 +23,24 @@ namespace AubreyRussellServer
 
                 };
 
-                List<CodeSnippet> codeSnippets = new List<CodeSnippet>();
-                codeSnippets.Add(codeSnippet);
+                List<CodeSnippet> codeSnippets = new List<CodeSnippet>() { codeSnippet };
+                List<ExperienceHistory> experienceHistories = new List<ExperienceHistory>() { GetRaytheonHistory(), GetGoDaddyHistory() };
 
-
-
-                List<ExperienceHistory> profExperience = new List<ExperienceHistory>();
-                profExperience.Add(GetRaytheonHistory());
-                //profExperience.Add(GetGoDaddyHistory());
-
-
-                Resume myResume = new Resume()
+                Resume resume = new Resume()
                 {
                     Person = me,
-                    CodeSnippets = codeSnippets,
-                    ProfessionalExperienceHistories = profExperience,
+                    ProfessionalExperienceHistories = experienceHistories,
                     EducationHistory = GetEducationHistory(),
-                    ProjectsHistory = GetProjectsHistory()
+                    ProjectsHistory = GetProjectsHistory(),
+                    CodeSnippets = codeSnippets
                 };
-                context.AddResume(myResume).Wait();
+
+                context.AddResume(resume).Wait();
+                //context.AddCodeSnippetToResume(me.EmailAddress, codeSnippet).Wait();
+                //context.AddProfessionalHistoryToResume(me.EmailAddress, profExperience[0]).Wait();
+                //context.AddProfessionalHistoryToResume(me.EmailAddress, profExperience[1]).Wait();
+                //context.AddEdducationToResume(me.EmailAddress, GetEducationHistory()).Wait();
+                //context.AddProjectToResume(me.EmailAddress, GetProjectsHistory()).Wait();
             }
         }
 

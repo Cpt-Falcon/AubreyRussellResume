@@ -11,8 +11,10 @@ namespace Entities.Models
     public class Person
     {
         [Key]
-        [ForeignKey("Resume")]
         public int Id { get; set; }
+
+        [ForeignKey("Resume")]
+        public int ResumeId { get; set; }
 
         public string FullName { get; set; }
 

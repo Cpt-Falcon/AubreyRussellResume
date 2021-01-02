@@ -21,5 +21,14 @@ namespace Entities.Models
         public ICollection<CodeSnippet> CodeSnippets { get; set; } = new List<CodeSnippet>();
 
         public Person Person { get; set; }
+
+        public void CopyContent(Resume existingResume)
+        {
+            this.ProfessionalExperienceHistories = existingResume.ProfessionalExperienceHistories;
+            this.EducationHistory = existingResume.EducationHistory;
+            this.ProjectsHistory = existingResume.ProjectsHistory;
+            this.CodeSnippets = existingResume.CodeSnippets;
+            this.Person = existingResume.Person;
+        }
     }
 }

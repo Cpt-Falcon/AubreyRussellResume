@@ -10,8 +10,10 @@ namespace Entities.Models
     public class EducationHistory
     {
         [Key]
-        [ForeignKey("Resume")]
         public int Id { get; set; }
+
+        [ForeignKey("Resume")]
+        public int ResumeId { get; set; }
 
         public ICollection<ContentItem> ExperienceItems { get; set; } = new List<ContentItem>();
 
