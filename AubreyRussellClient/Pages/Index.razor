@@ -20,12 +20,12 @@
                                         @profExperience.Employer.Name
                                     </div>
                                     <div style="font-size: 14px; color: #d3d3d3; margin-left: auto; margin-top: 12px;">
-                                        @profExperience.StartDate-@endDate
+                                        @profExperience.StartDate.Year-@endDate
                                     </div>
                                 </div>
                             </li>
 
-                            @foreach (ContentItem profContent in profExperience.ExperienceItems)
+                            @foreach (ContentItem profContent in profExperience.ExperienceItems.OrderBy(x => x.ExperienceItemContent))
                             {
                                 <li class="list-group-item" style="margin-top: 10px; margin-right: auto;">
                                     <b>@profContent.ExperienceItemContent</b>

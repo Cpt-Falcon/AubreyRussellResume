@@ -1,5 +1,6 @@
-﻿@inject NavigationManager Navigation
-
+﻿@using Microsoft.Extensions.Configuration
+@inject NavigationManager Navigation
+@inject IConfiguration Configuration
 <div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">Dynamic Resume</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -20,8 +21,8 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-terminal" aria-hidden="true"></span> Cool Demos
+            <NavLink class="nav-link" href="WebsiteDesign">
+                <span class="oi oi-terminal" aria-hidden="true"></span> Website Design
             </NavLink>
         </li>
         <li class="nav-item px-3">
@@ -49,6 +50,6 @@
 
     private void GotoAPI()
     {
-        this.Navigation.NavigateTo("https://localhost:44381/swagger/", true);
+        this.Navigation.NavigateTo(this.Configuration["restAPIBasePath"] + "swagger/index.html", true);
     }
 }

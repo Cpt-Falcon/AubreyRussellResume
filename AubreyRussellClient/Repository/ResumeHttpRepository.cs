@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,24 @@ namespace AubreyRussellClient.Repository
     public class ResumeHttpRepository
     {
         private readonly HttpClient _client;
-        public ResumeHttpRepository(HttpClient client)
+
+        private IConfiguration wasmConfiguration;
+
+        public ResumeHttpRepository(HttpClient client, IConfiguration configuration)
         {
             _client = client;
+            this.wasmConfiguration = configuration;
         }
 
         public async Task<Resume> GetResumeContent()
         {
-            var builder = new UriBuilder("https://localhost/api/Resume/GetResumeContent");
-            builder.Port = 44381;
+            var builder = new UriBuilder(this.wasmConfiguration["restAPIBasePath"] + "api/Resume/GetResumeContent");
+            int port;
+            if ((port = int.Parse(this.wasmConfiguration["port"])) > 0)
+            {
+                builder.Port = port;
+            }
+
             var query = HttpUtility.ParseQueryString(builder.Query);
 
             // For now just hardcode my email address

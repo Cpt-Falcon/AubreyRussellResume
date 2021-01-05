@@ -1,5 +1,27 @@
-﻿<h3>WebsiteDesign</h3>
-
+﻿@page "/WebsiteDesign"
+<h3>Website Design</h3>
+<div class="container">
+    <div>
+        <div>
+            <img style="width: 100%; margin-bottom: 15px;" src="./images/SystemArchitectureOverview.png" />
+        </div>
+        <div style="margin-bottom: 50px;">
+            <h5><b>Figure 1:</b> The system architecture utilizes a Blazor WASM client that retrieves data from an ASP.NET Core MVC REST API. The REST API then makes DB calls via Entity Framework Core, which requires going to GearHost in order to be completely free.</h5>
+        </div>
+        <div>
+            <img style="width: 100%; margin-bottom: 15px;" src="./images/EFCoreDesign.png" />
+        </div>
+        <div style="margin-bottom: 50px;">
+            <h5><b>Figure 2:</b> Entity Framework ORM design, this website uses Entity Framework to retrieve data from an external SQL database in order to build up the resume content.</h5>
+        </div>
+        <div>
+            <img style="margin-left: 35%; margin-bottom: 15px;" src="./images/RepoLayout.png" />
+        </div>
+        <div>
+            <h5><b>Figure 3:</b> The repo layout utilizes a shared utility library full of models used by the entity framework, you can see this current repo at <a href="https://github.com/serp777/AubreyRussellResume">Aubrey Russell Resume Github Repo</a>. This website is new and is still going to be enhanced by adding code snippets, demos, and a more capable API. This website can be used for people to tailor interesting virtual resumes.</h5>
+        </div>
+    </div>
+</div>
 @code {
 
 }
