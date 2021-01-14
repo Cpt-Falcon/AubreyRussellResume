@@ -63,6 +63,11 @@
         await jsRuntime.InvokeVoidAsync("updateChart", this.ChartId, chartDefinition);
     }
 
+    public async Task DestroyChart()
+    {
+        await jsRuntime.InvokeVoidAsync("destroyChart", this.ChartId);
+    }
+
     public class ChartDefinition
     {
         public string type { get; set; }

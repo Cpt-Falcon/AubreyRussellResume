@@ -11,5 +11,9 @@ function updateChart(chartId, chartJson) {
     else {
         charts[chartId] = new Chart(ctx, chartJson);
     }
+}
 
+function destroyChart(chartId) {
+    charts[chartId].destroy();
+    charts[chartId] = null;
 }

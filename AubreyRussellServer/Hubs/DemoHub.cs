@@ -18,7 +18,7 @@ namespace AubreyRussellServer.Hubs
                 testData[i] = (float)rng.Next(0, 1000);
             }
 
-            await Clients.All.SendAsync("ReceiveData", testData);
+            await Clients.All.SendAsync("ReceiveData", testData, this.Context.GetHttpContext().Request.QueryString.ToUriComponent(), this.Context.GetHttpContext().TraceIdentifier);
         }
     }
 }

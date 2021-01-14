@@ -3,15 +3,25 @@
 @using AubreyRussellClient.Repository
 @using System.Threading;
 @using System.Threading.Tasks;
-
 @implements IAsyncDisposable
 <h3>signalRDemo</h3>
-
-<TimeSeriesChart @ref="chartRef" ChartId="1" Data="this.lastData" Labels="this.Labels"/>
+<div class="container">
+    <div>
+        @this.lastRequest
+    </div>
+    <div>
+        @this.lastResponse
+    </div>
+</div>
+<TimeSeriesChart @ref="chartRef" ChartId="1" Data="this.lastData" Labels="this.Labels" />
 
 @code {
     [Inject]
     public ResumeHttpRepository ResumeRepo { get; set; }
+
+    private string lastRequest;
+
+    private string lastResponse;
 
     private TimeSeriesChart chartRef;
 
@@ -21,7 +31,8 @@
 
     private List<float> lastData = new List<float>();
 
-    private List<string> Labels {
+    private List<string> Labels
+    {
         get
         {
             List<string> labels = new List<string>();
@@ -34,30 +45,35 @@
         }
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl(this.ResumeRepo.GetApiPath() + "demohub")
-            .Build();
+        if (firstRender)
+        {
+            hubConnection = new HubConnectionBuilder()
+                .WithUrl(this.ResumeRepo.GetApiPath() + "demohub")
+                .Build();
 
-        this.timer = new Timer(async (object stateInfo) =>
-        {
-            await hubConnection.SendAsync("SendData");
-        }, new System.Threading.AutoResetEvent(false), 1000, 1000);
-        hubConnection.On<float[]>("ReceiveData", async (message) =>
-        {
-            this.lastData = message.ToList();
-            await this.chartRef.UpdateData(1, this.lastData, this.Labels);
-            StateHasChanged();
-        });
+            this.timer = new Timer(async (object stateInfo) =>
+            {
+                await hubConnection.SendAsync("SendData");
+            }, new System.Threading.AutoResetEvent(false), 1000, 1000);
+            hubConnection.On<float[], string, string>("ReceiveData", async (message, request, response) =>
+            {
+                this.lastData = message.ToList();
+                this.lastRequest = request;
+                this.lastResponse = response;
+                await this.chartRef.UpdateData(1, this.lastData, this.Labels);
+                StateHasChanged();
+            });
 
-        try
-        {
-            await hubConnection.StartAsync();
-        }
-        catch (Exception)
-        {
+            try
+            {
+                await hubConnection.StartAsync();
+            }
+            catch (Exception)
+            {
 
+            }
         }
     }
 
@@ -65,5 +81,6 @@
     {
         await this.timer.DisposeAsync();
         await hubConnection.DisposeAsync();
+        await this.chartRef.DestroyChart();
     }
 }
