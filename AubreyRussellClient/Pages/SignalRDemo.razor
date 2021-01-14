@@ -1,0 +1,69 @@
+﻿@page "/signalRDemo"
+@using Microsoft.AspNetCore.SignalR.Client
+@using AubreyRussellClient.Repository
+@using System.Threading;
+@using System.Threading.Tasks;
+
+@implements IAsyncDisposable
+<h3>signalRDemo</h3>
+
+<TimeSeriesChart @ref="chartRef" ChartId="1" Data="this.lastData" Labels="this.Labels"/>
+
+@code {
+    [Inject]
+    public ResumeHttpRepository ResumeRepo { get; set; }
+
+    private TimeSeriesChart chartRef;
+
+    private HubConnection hubConnection;
+
+    private Timer timer;
+
+    private List<float> lastData = new List<float>();
+
+    private List<string> Labels {
+        get
+        {
+            List<string> labels = new List<string>();
+            for (int i = 0; i < lastData.Count; i++)
+            {
+                labels.Add(i.ToString());
+            }
+
+            return labels;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(this.ResumeRepo.GetApiPath() + "demohub")
+            .Build();
+
+        this.timer = new Timer(async (object stateInfo) =>
+        {
+            await hubConnection.SendAsync("SendData");
+        }, new System.Threading.AutoResetEvent(false), 1000, 1000);
+        hubConnection.On<float[]>("ReceiveData", async (message) =>
+        {
+            this.lastData = message.ToList();
+            await this.chartRef.UpdateData(1, this.lastData, this.Labels);
+            StateHasChanged();
+        });
+
+        try
+        {
+            await hubConnection.StartAsync();
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await this.timer.DisposeAsync();
+        await hubConnection.DisposeAsync();
+    }
+}

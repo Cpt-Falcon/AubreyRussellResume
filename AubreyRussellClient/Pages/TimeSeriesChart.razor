@@ -1,0 +1,102 @@
+﻿@using System.Net.Http.Json
+@using System.Threading;
+@inject IJSRuntime jsRuntime
+
+<canvas id="@this.ChartIdStr"/>
+
+@code {
+    [Parameter]
+    public List<float> Data { get; set; }
+
+    [Parameter]
+    public List<string> Labels { get; set; }
+
+    [Parameter]
+    public int ChartId { get; set; }
+
+    public string ChartIdStr
+    {
+        get
+        {
+            return "chart" + this.ChartId;
+        }
+    }
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await this.UpdateData(this.ChartId, this.Data, this.Labels);
+
+    //    }
+    //}
+
+    public async Task UpdateData(int id, List<float> newData, List<string> newLabls)
+    {
+        ChartDefinition timeSeries = new ChartDefinition()
+        {
+            type = "line",
+            data = new ChartData()
+            {
+                labels = newLabls.ToArray(),
+                datasets = new ChartDataset[]
+                {
+                    new ChartDataset()
+                    {
+                        label = "Demo Chart",
+                        backgroundColor = "rgb(255, 99, 132)",
+                        borderColor = "rgb(255, 99, 132)",
+                        data = newData.ToArray(),
+                    }
+                }
+            },
+            options = new ChartOptions()
+            {
+                animation = new AnimationOptions()
+                {
+                    duration = 0
+                }
+            }
+        };
+
+        var chartDefinition = System.Text.Json.JsonSerializer.Serialize(timeSeries);
+        await jsRuntime.InvokeVoidAsync("updateChart", this.ChartId, chartDefinition);
+    }
+
+    public class ChartDefinition
+    {
+        public string type { get; set; }
+
+        public ChartData data { get; set; }
+
+        public ChartOptions options { get; set; }
+    }
+
+    public class ChartData
+    {
+        public string[] labels { get; set; }
+
+        public ChartDataset[] datasets { get; set; }
+    }
+
+    public class ChartDataset
+    {
+        public string label { get; set; }
+
+        public string backgroundColor { get; set; }
+
+        public string borderColor { get; set; }
+
+        public float[] data { get; set; }
+    }
+
+    public class ChartOptions
+    {
+        public AnimationOptions animation {get; set;}
+    }
+
+    public class AnimationOptions
+    {
+        public double duration { get; set; }
+    }
+}

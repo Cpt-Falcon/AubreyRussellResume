@@ -22,6 +22,11 @@ namespace AubreyRussellClient.Repository
             this.wasmConfiguration = configuration;
         }
 
+        public string GetApiPath()
+        {
+            return this.wasmConfiguration["restAPIBasePath"];
+        }
+
         public async Task<Resume> GetResumeContent()
         {
             var builder = new UriBuilder(this.wasmConfiguration["restAPIBasePath"] + "api/Resume/GetResumeContent");

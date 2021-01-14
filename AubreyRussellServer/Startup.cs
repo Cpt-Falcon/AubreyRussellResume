@@ -1,9 +1,11 @@
 //using AubreyRussellServer.Utilities;
+using AubreyRussellServer.Hubs;
 using AubreyRussellServer.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,7 @@ namespace AubreyRussellServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddCors(policy =>
             {
                 policy.AddPolicy("CorsPolicy", opt => opt
@@ -49,6 +52,11 @@ namespace AubreyRussellServer
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AubreyRussellServer", Version = "v1" });
             });
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +67,7 @@ namespace AubreyRussellServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseResponseCompression();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AubreyRussellServer v1"));
 
@@ -69,6 +78,7 @@ namespace AubreyRussellServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<DemoHub>("/demohub");
             });
         }
     }
