@@ -35,7 +35,8 @@ namespace AubreyRussellServer
                 try
                 {
                     var context = services.GetRequiredService<ResumeContext>();
-                    DbInitializer.Initialize(context);
+                    var sqlManager = services.GetRequiredService<SqlDBManagerService>();
+                    DbInitializer.Initialize(context, sqlManager);
                 }
                 catch (Exception ex)
                 {

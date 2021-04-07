@@ -22,9 +22,8 @@ namespace AubreyRussellServer.Controllers
             this.resumeContext = resumeContext;
         }
 
-        [HttpGet]
-        [Route("GetResumeContent")]
-        public async Task<Resume> GetResumeContent(string resumePersonEmail)
+        [HttpGet("{resumePersonEmail}")]
+        public async Task<Resume> Get(string resumePersonEmail)
         {
             return await resumeContext.GetCompleteResumeByPersonEmail(resumePersonEmail);
         }

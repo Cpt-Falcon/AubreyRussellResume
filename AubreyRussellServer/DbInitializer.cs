@@ -9,8 +9,9 @@ namespace AubreyRussellServer
 {
     public static class DbInitializer
     {
-        public static void Initialize(ResumeContext context)
+        public static void Initialize(ResumeContext context, SqlDBManagerService sqlDBManager)
         {
+            sqlDBManager.InitDatabase().Wait();
             // Uncomment to clear database each time.
             //context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())

@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,6 +45,8 @@ namespace AubreyRussellServer
             services.AddDbContext<ResumeContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true)
             );
+
+            services.AddScoped<SqlDBManagerService, SqlDBManagerService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
